@@ -10,7 +10,16 @@ public class Provider:Vapor.Provider {
     
     public var provided:Providable
     
+    /**
+         MongoDB driver conforming to Fluent.Driver used to instantiate the
+         database object used by Vapor's Droplet
+    */
+    
     public let driver:MongoDriver
+    
+    /**
+            Fluent.Database object used by Vapor's Droplet.
+    */
     
     public let database:Database
     
@@ -26,6 +35,20 @@ public class Provider:Vapor.Provider {
         self.provided = Providable(database:self.database)
     }
     
+    /**
+        Provider can be inited from a config file.
+        Put your configuration file `mongodb.json`
+        in the Config folder for your Vapor project
+        with the following syntax : 
+        `{
+            "database": _
+            "user": _
+            "password": _
+            "host": _
+            "port": _
+        }`
+    */
+
     public convenience required init(config:Config) throws {
         
         guard let mongodb = config["mongodb"]?.object else {
