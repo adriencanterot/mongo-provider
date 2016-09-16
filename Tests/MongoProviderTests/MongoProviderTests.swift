@@ -1,17 +1,22 @@
 import XCTest
 @testable import MongoProvider
+import Vapor
 
 class MongoProviderTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertEqual(MongoProvider().text, "Hello, World!")
-    }
+
 
 
     static var allTests : [(String, (MongoProviderTests) -> () throws -> Void)] {
         return [
-            ("testExample", testExample),
+            ("testDatabase", testDatabase),
         ]
     }
+    
+    func testDatabase() throws {
+        let mongoProvider = try Provider(database: "test", user: "test", password: "test", host: "localhost", port: 27017)
+        let droplet = Droplet(initializedProviders:[mongoProvider])
+        
+        XCTAssertNotNil(droplet.database)
+    }
+    
 }
