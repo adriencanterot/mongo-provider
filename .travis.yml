@@ -5,8 +5,7 @@ language: generic
 sudo: required
 dist: trusty
 osx_image: xcode8
-services:
-  - mongodb
+services: mongodb
 before_script:
   - sleep 15
   - mongo test --eval 'db.addUser("test", "test");'
