@@ -7,6 +7,9 @@ dist: trusty
 osx_image: xcode8
 services:
   - mongodb
+before_script:
+  - sleep 15
+  - mongo mydb_test --eval 'db.addUser("test", "test");'
 script:
   - eval "$(curl -sL swift.vapor.sh/ci)"
   - eval "$(curl -sL swift.vapor.sh/codecov)"
