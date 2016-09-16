@@ -19,4 +19,20 @@ class MongoProviderTests: XCTestCase {
         XCTAssertNotNil(droplet.database)
     }
     
+    func testConfigInit()  throws {
+        let config = try Config(node: [
+            "mongodb": [
+                "database":"test",
+                "user":"test",
+                "password":"test",
+                "host":"localhost",
+                "port": 27017
+                ]
+            ])
+
+        let mongoProvider = try Provider(config: config)
+        let droplet = Droplet(initializedProviders:[mongoProvider])
+        
+        XCTAssertNotNil(droplet.database)
+    }
 }
