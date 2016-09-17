@@ -8,9 +8,7 @@ osx_image: xcode8
 addons:
   services:
     - mongod
-before_script:
-  - sleep 15
-  - mongo test --eval 'db.createUser( { user: "test", pwd: "test", roles: [ ] })'
+
 script:
   - eval "$(curl -sL swift.vapor.sh/ci)"
   - eval "$(curl -sL swift.vapor.sh/codecov)"
