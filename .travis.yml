@@ -5,10 +5,12 @@ language: generic
 sudo: required
 dist: trusty
 osx_image: xcode8
-services: mongodb
+addons:
+  services:
+    - mongod
 before_script:
   - sleep 15
-  - mongo test --eval 'db.addUser("test", "test");'
+  - mongo test --eval 'db.createUser( { user: "test", pwd: "test", roles: [ ] })'
 script:
   - eval "$(curl -sL swift.vapor.sh/ci)"
   - eval "$(curl -sL swift.vapor.sh/codecov)"
